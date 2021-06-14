@@ -50,7 +50,7 @@ public class GithubProxyServiceTest {
     @Test
     public void shouldGetRepositoriesWhenGitHubReturnsRepositories() {
         when(githubFeignClient.getAllRepositories(ArgumentMatchers.any(), ArgumentMatchers.any())).thenReturn(repositories);
-        final List<Repository> repositories = githubProxyService.getRepositories("", "");
+        final List<Repository> repositories = githubProxyService.getRepositories("topic:java", "1");
         assertThat(repositories.size(), is(1));
         assertThat(repositories.get(0).getName(), is("name"));
         assertThat(repositories.get(0).getUrl(), is("http://xyz.com"));
@@ -63,7 +63,7 @@ public class GithubProxyServiceTest {
     public void shouldThrowGithubProxyExceptionWhenGithubThrowsFeignException() {
         when(githubFeignClient.getAllRepositories(ArgumentMatchers.any(), ArgumentMatchers.any())).thenThrow(FeignException.UnprocessableEntity.class);
         Assertions.assertThrows(GithubProxyException.class, () ->
-                githubProxyService.getRepositories("", "")
+                githubProxyService.getRepositories("topic:java", "1")
         );
     }
 

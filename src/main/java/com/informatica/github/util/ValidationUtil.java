@@ -1,7 +1,5 @@
 package com.informatica.github.util;
 
-import java.util.Objects;
-
 import com.informatica.github.controller.GithubProxyController;
 import com.informatica.github.exception.InvalidParametersException;
 import org.slf4j.Logger;
@@ -15,10 +13,6 @@ public class ValidationUtil {
     }
 
     public static void validateQueryParam(final String q) {
-
-        if (Objects.isNull(q)) {
-            return;
-        }
 
         // can add any validation in future.
         if (q.contains(" ")) {
